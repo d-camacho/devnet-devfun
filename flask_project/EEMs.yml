@@ -1,0 +1,25 @@
+EEMs:
+  - name: MAIN
+    commands: 
+    - event manager applet MAIN authorization bypass
+    - event none maxrun 60
+    action:    
+    - "enable"
+    - "configure terminal"
+    - "interface f0/1"
+    - "description MAIN"
+    - "switchport mode access vlan 100"
+    - "end"
+
+  - name: BRANCH
+    commands: 
+    - event manager applet BRANCH authorization bypass
+    - event none maxrun 60
+    action:    
+    - "enable"
+    - "configure terminal"
+    - "interface f0/2"
+    - "description BRANCH"
+    - "switchport mode access vlan 200"
+    - "end"
+  

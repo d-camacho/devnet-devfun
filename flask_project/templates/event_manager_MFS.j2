@@ -1,0 +1,19 @@
+{# this template is used to iterate through the required EEMs for each device type as indicated in the 
+yml playbook under group_vars then looks at the EEMs section of all.yml to generate the configurations
+#}
+
+{# iterate through EEMs and check if EEM name is in the required EEM liste based on device type #}
+{% for eem in EEMs %}
+{% if eem.name in reqdEEMs %}
+{# if eem is in required EEM, the following lines are generated #}
+{% for command in eem.commands %}
+{{ command }}
+{% endfor %}
+{# this portion loops through all the cli command actions and increments the index every loop #}
+{% for action in eem.action %}
+action {{ loop.index }}.0 cli command "{{ action }}"
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+

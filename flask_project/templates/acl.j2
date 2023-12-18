@@ -1,0 +1,29 @@
+{% for num in reqdACLs %}
+{% set info = ACLs.get(num) %}
+{% if info is not none %}"
+{% set lines = info.get ('lines') %}
+!
+ip access-list {{ info.type}} {{num}}
+{% for statement in lines %}
+{% for key, value in statement.items %}
+{% if value is string %}
+{% if value[1] is not defined %}
+{% elif key == 'deny' %}
+ {{ key }}   {{ value }}
+{% else %}
+ {{ key }} {{ value }}
+{% endif %}
+{% else %}
+{% for ip in value %}
+{% if ip[1] is not defined %}
+{% elif key=='deny' %}
+ {{ key }}   {{ ip }}
+{% else %}
+ {{ key }} {{ ip }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% endfor %}

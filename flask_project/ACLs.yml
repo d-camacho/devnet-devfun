@@ -1,0 +1,25 @@
+ACLs:
+  '1':
+    type: standard
+    lines: 
+    - remark: TEST1
+    - permit: 
+      - 192.168.0.0 0.0.0.255
+      - 192.168.1.0 0.0.0.255
+    - deny: any log
+  '2':
+    type: standard
+    lines: 
+    - remark: TEST2
+    - permit: 
+      - 192.168.2.0 0.0.0.255
+      - 192.168.3.0 0.0.0.255
+    - deny: any log
+    '3':
+    type: standard
+    lines: 
+    - remark: TEST3
+    - permit: 
+      - 192.168.4.0 0.0.0.255
+      - 192.168.5.0 0.0.0.255
+    - deny: any log

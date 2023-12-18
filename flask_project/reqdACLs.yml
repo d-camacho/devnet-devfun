@@ -1,0 +1,10 @@
+reqdACLs:
+  device_type:
+    - large:
+      - '1'
+      - '2'
+      - '3'
+    - medium:
+      - '1'
+      - '2'
+    - small: '3'
