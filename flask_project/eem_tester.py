@@ -4,29 +4,31 @@ import yaml
 # Your YAML data
 yaml_data = """
 EEMs:
-  - name: MAIN
-    commands: 
-    - event manager applet {{ eem.name }} authorization bypass
-    - event none maxrun 60
-    action:    
-    - "enable"
-    - "configure terminal"
-    - "interface f0/1"
-    - "description MAIN"
-    - "switchport mode access vlan 100"
-    - "end"
+  name: MAIN
+    - commands 
+      - event manager applet {{ eem.name }} authorization bypass
+      - event none maxrun 60
+    - action    
+      - "enable"
+      - "configure terminal"
+      - "interface f0/1"
+      - sub_action
+        - "description MAIN"
+        - "switchport mode access vlan 100"
+      - "end"
 
-  - name: BRANCH
-    commands: 
-    - event manager applet {{ eem.name }} authorization bypass
-    - event none maxrun 60
-    action:    
-    - "enable"
-    - "configure terminal"
-    - "interface f0/2"
-    - "description BRANCH"
-    - "switchport mode access vlan 200"
-    - "end"
+  name: BRANCH
+    - commands
+      - event manager applet {{ eem.name }} authorization bypass
+      - event none maxrun 60
+    - action    
+      - "enable"
+      - "configure terminal"
+      - "interface f0/2"
+      - sub_action
+        - "description BRANCH"
+        - "switchport mode access vlan 200"
+      - "end"
 """
 
 # Your Jinja template
@@ -38,7 +40,9 @@ jinja_template = """
 {{ command }}
 {% endfor %}
 {% for action in eem.action %}
-action {{ loop.index }}.0 cli command "{{ action }}"
+  action {{ loop.index }}.0 cli command "{{ action }}"
+(% for action in action.sub_action)
+  action {{ loop.parent.loop.index }}.{{ loop.index }} "{{ action }}"
 {% endfor %}
 {% endif %}
 {% endfor %}
