@@ -1,5 +1,6 @@
 '''
-Create a solution that accepts an integer input representing the index value for any any of the five elements in the following list:
+Create a solution that accepts an integer input representing the index value 
+for any any of the five elements in the following list:
 
 various_data_types = [516, 112.49, True, "meow", ("Western", "Governors", "University"), {"apple": 1, "pear": 5}]
 
@@ -17,4 +18,11 @@ then the expected output is
 Element 4: tuple
 
 '''
+various_data_types = [516, 112.49, True, "meow", ("Western", "Governors", "University"), {"apple": 1, "pear": 5}]
+element_index = int(input())
 
+if 0 <= element_index < len(various_data_types):
+    type_element = type(various_data_types[element_index]).__name__
+    print(f'Element {element_index}: {type_element}')
+else:
+    print('Input is outside of range')

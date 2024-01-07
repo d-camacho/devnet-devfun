@@ -1,5 +1,6 @@
 '''
-Create a solution that accepts five integer inputs. Output the sum of the five inputs three times, converting the inputs to the requested data type prior to finding the sum.
+Create a solution that accepts five integer inputs. Output the sum of the five inputs three times, 
+converting the inputs to the requested data type prior to finding the sum.
 
 First output: sum of five inputs maintained as integer values
 Second output: sum of five inputs converted to float values
@@ -45,3 +46,7 @@ sum_str = str(num1) + str(num2) + str (num3) + str(num4) + str(num5) # convert e
 print(f'Integer: {sum_int}')
 print(f'Float: {sum_flt}')
 print(f'String: {sum_str}')
+
+
+
+          

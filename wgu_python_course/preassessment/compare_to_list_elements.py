@@ -27,14 +27,20 @@ predef_list = [4, -27, 15, 33, -10]
 user_input = int(input())
 
 # determine max from list
-i = 0
-max = 0
-for i in range(len(predef_list)):
-    if predef_list[i] > max:
-        max = predef_list[i]
+# i = 0
+# max = 0
+# for i in range(len(predef_list)):
+#     if predef_list[i] > max:
+#         max = predef_list[i]
         
-print('Greater Than Max?', end=' ')
-if user_input > max:
-    print('True')
-else:
-    print('False')
+# print('Greater Than Max?', end=' ')
+# print(user_input > max)
+# if user_input > max:
+#     print('True')
+# else:
+#     print('False')
+
+#max = max(predef_list)
+print(f'Greater Than Max? {user_input > max(predef_list)}')
+
+

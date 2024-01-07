@@ -30,12 +30,17 @@ num_shares = int(input())
 
 cost_of_stocks = 0.0
 
+
 for num in range(num_shares): # cycle through user input and receive desired stocks to purchase
     selected_stocks = input()
     if selected_stocks in stocks: # check if desired stocks are in list
         cost_of_stocks += stocks[selected_stocks]
+        print(f'Total price: ${cost_of_stocks:.2f}')
+    else:
+        print('Enter valid stock name')
+    
 
-print(f'Total price: ${cost_of_stocks:.2f}')
+
 
 
 
