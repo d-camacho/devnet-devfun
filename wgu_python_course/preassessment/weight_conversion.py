@@ -36,3 +36,17 @@ print(f'Tons: {weight_tons}')
 print(f'Pounds: {weight_pounds}')
 print(f'Ounces: {weight_ounces}')
 
+
+
+# convert to tons
+weight_tons = user_weight // (16 * 2000) 
+# remaining weight in pounds after calculating tons
+remaining_pounds = user_weight % (16 * 2000) # yields ounces so have to divi
+# calculate pounds
+weight_pounds = remaining_pounds // 16
+# calculate remaining ounces
+weight_ounces = remaining_pounds % 16
+
+print(f'Tons: {weight_tons}')
+print(f'Pounds: {weight_pounds}')
+print(f'Ounces: {weight_ounces}')

@@ -36,3 +36,10 @@ greater_than_100 = final_value > 100 # determine if final_value is greater or le
 # output
 print(final_value)
 print(greater_than_100)
+
+import math
+num_to_convert = int(input())
+
+factorial_value = math.factorial(num_to_convert)
+print(factorial_value)
+print(factorial_value > 100)

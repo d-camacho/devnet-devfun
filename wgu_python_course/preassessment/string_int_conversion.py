@@ -50,3 +50,16 @@ print(f'String: {sum_str}')
 
 
           
+val1 = int(input())
+val2 = int(input())
+val3 = int(input())
+val4 = int(input())
+val5 = int(input())
+
+sum_int = val1 + val2 + val3 + val4 + val5
+sum_float = float(sum_int)
+sum_string = str(val1) + str(val2) + str(val3) + str(val4) + str(val5)
+
+print(f'Integer: {sum_int}')
+print(f'Float: {sum_float}')
+print(f'String: {sum_string}')

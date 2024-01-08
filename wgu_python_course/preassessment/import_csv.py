@@ -28,31 +28,36 @@ then the expected output is
 #solution accepts input identifying name of CSV file (i.e., "input1.csv")
 #solution outputs each row of CSV file contents as a dictionary of elements
 
-# intialize empty dictionaries to store key:value pairs assuming two dicts as stated in tasks
-# dict1 = {}
-# dict2 = {}
-# with open(file_name, 'r') as csv_file:
-#         csv_reader = csv.reader(csv_file)
-#         # extract info and store in dictionary 
-#         for row_number, row in enumerate(csv_reader):
-#             if row_number == 0:
-#                 # Process the first row and populate dict1
-#                 dict1 = {key: value for key, value in zip(row[::2], row[1::2])}
-#             elif row_number == 1:
-#                 # Process the second row and populate dict2
-#                 dict2 = {key: value for key, value in zip(row[::2], row[1::2])}
-
-# Output the dictionaries
-# print(dict1)
-# print(dict2)
-
 import csv
 
-file_name = input()
-with open(file_name, 'r') as csv_file:
-    csv_reader = csv.reader(csv_file, delimeter=',') # csv.reader creates an iterable objects -- reads the file and stores in a dict using comma as the separator for the key, value pair
-    row_num = 1 # initialized the loop for reach row 
-    for row in csv_reader:
-        print(row)
-        row_num += 1
+file_name = input("Enter the name of the CSV file: ")
 
+with open(file_name, 'r') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    
+    for row in csv_reader:
+        # Create a dictionary using pairs of alternating elements in the row
+        row_dict = {row[i].strip(): row[i + 1].strip() for i in range(0, len(row), 2)}
+        print(row_dict)
+
+
+{row[i].strip(): row[i + 1].strip() for i in range(0, len(row), 2)}
+
+# always break stuff down.
+'''
+{ key:value for key, value in thing} is a dict comprehension. It is a more complicated brother to list comprehensions. 
+You are better off starting out to use a for loop as they are pretty much the same and easier to read.
+'''
+output = {}
+
+for i in range(0, len(row), 2):
+    key = row[i].strip()
+    value = row[i + 1].strip()
+    output[key] = value
+# or
+
+output = {}
+
+for i in range(0, len(row), 2):
+    output[row[i].strip()]  = row[i + 1].strip()
+So really it is as much about readability as anything else. I'd probably chose the last example as the sweet spot in this example.

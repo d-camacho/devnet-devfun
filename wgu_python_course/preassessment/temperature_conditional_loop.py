@@ -62,3 +62,20 @@ elif curr_temp < 33:
 
     
     
+try:
+    user_temp = int(input())
+    if user_temp >= 212:
+        print('Boiling')
+        if user_temp == 212:
+            print('Caution: Hot!')
+    elif 115 <= user_temp <= 211:
+        print('Hot')
+    elif 80 <= user_temp < 115:
+        print('Warm')
+    elif 33 <= user_temp < 80:
+        print('Cold')
+    elif user_temp < 33:
+        print('Frozen')
+        print('Watch out for ice!')
+except ValueError:
+    print('Input must be a number.')

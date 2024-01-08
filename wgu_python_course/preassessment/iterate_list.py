@@ -27,10 +27,7 @@ stocks = {'TSLA': 912.86, 'BBBY': 24.84, 'AAPL': 174.26, 'SOFI': 6.92, 'KIRK': 8
 #solution outputs the total cost of stock as "Total price: $" followed by the total cost to 2 decimal places
 
 num_shares = int(input())
-
 cost_of_stocks = 0.0
-
-
 for num in range(num_shares): # cycle through user input and receive desired stocks to purchase
     selected_stocks = input()
     if selected_stocks in stocks: # check if desired stocks are in list
@@ -40,7 +37,15 @@ for num in range(num_shares): # cycle through user input and receive desired sto
         print('Enter valid stock name')
     
 
-
+num_stocks= int(input())
+total_cost = 0
+for num in range(num_stocks):
+    stock_to_buy = input()
+    if stock_to_buy in stocks:
+        total_cost += stocks[stock_to_buy]
+    else:
+        print(f'Selected stock is not available: {stock_to_buy}')
+print(f'Total price: ${total_cost:.2f}')
 
 
 

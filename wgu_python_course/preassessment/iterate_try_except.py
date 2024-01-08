@@ -38,3 +38,11 @@ except IndexError:
     print('Error') # validates input if value is outside the range of list
 except ValueError:
     print('Error') # validates input if value is non-integer
+
+
+try:
+    user_index = int(input())
+    element = frameworks[user_index]
+    print(element)
+except:
+    print('Error')

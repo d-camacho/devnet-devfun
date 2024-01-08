@@ -35,3 +35,15 @@ num_travel_c = float(input())
 
 total_dist = (num_travel_a * dist_a) + (num_travel_b * dist_b) + (num_travel_c * dist_c)
 print(f'Distance: {total_dist:.2f} miles')
+
+
+dista = 15.62
+distb = 41.85 
+distc = 32.67
+
+num_travela = int(input())
+num_travelb = int(input())
+num_travelc = int(input())
+
+total_distance = (dista * num_travela) + (distb * num_travelb) + (distc * num_travelc)
+print(f'Distance: {total_distance:.2f} miles')

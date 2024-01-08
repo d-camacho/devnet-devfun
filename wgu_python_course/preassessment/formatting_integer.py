@@ -24,3 +24,14 @@ tmp_segment_2 = user_input % 1000000
 segment_2 = str(tmp_segment_2 // 10000)
 segment_3 = str(tmp_segment_2 % 10000)
 print(f'{segment_1}-{segment_2}-{segment_3}')
+
+
+num_to_convert = int(input())
+
+# extract by segments with xxx-xx-xxxx as 1st, 2nd, and 3rd respectively
+seg1 = num_to_convert // 1000000
+temp_seg2 = num_to_convert % 1000000
+seg2 = temp_seg2 // 10000
+seg3 = temp_seg2 % 10000
+
+print(f'{seg1}-{seg2}-{seg3}')

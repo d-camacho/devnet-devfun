@@ -18,8 +18,14 @@ then the expected output is
 #solution accepts integer input representing a pig's age
 #solution outputs the human equivalent age for a pig (i.e. "8 is 40 in human years")
 
-import pigAge
-pig_age = int(input())
+# import pigAge
+# pig_age = int(input())
 
-converted_age = pigAge.pigAge_converter(pig_age)
-print(f'{pig_age} is {converted_age} in human years')
+# converted_age = pigAge.pigAge_converter(pig_age)
+# print(f'{pig_age} is {converted_age} in human years')
+
+from pigAge import pigAge_converter
+
+pig_age = int(input())
+human_age = pigAge_converter(pig_age)
+print(f'{pig_age} is {human_age} in human years')

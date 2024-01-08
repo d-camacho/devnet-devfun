@@ -36,3 +36,13 @@ for word in words:
 sentence = ' '.join(words)
 print(sentence)
     
+file_name = input()
+
+with open(file_name, 'r') as myfile:
+    contents = myfile.read()
+    words = contents.split()
+    sentence = ' '.join(words)
+print(words[0])
+print(words[1])
+print(words[2])
+print(sentence)

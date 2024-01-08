@@ -44,3 +44,5 @@ user_input = int(input())
 print(f'Greater Than Max? {user_input > max(predef_list)}')
 
 
+user_num = int(input())
+print('Greater Than Max?', user_num > max(predef_list))
