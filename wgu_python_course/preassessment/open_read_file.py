@@ -46,3 +46,25 @@ print(words[0])
 print(words[1])
 print(words[2])
 print(sentence)
+
+import csv
+
+file_name = input()
+
+with open(file_name, 'r') as csv_file:
+    reader = csv.reader(csv_file, ',')
+    for row in reader:
+        dict = {}
+        for i in range(0, len(row), 2):
+            key = row[i].strip()
+            value = row[i + 1].strip()
+            dict[key] = value
+
+    # OR
+        dict = {}
+        for i in range(0, len(row), 2):
+            dict[row[i].strip()] = row[i + 1].strip()
+
+    # OR
+        dict = { row[i].strip(): row[i + 1].strip() for i in range(0, len(row), 2)}
+

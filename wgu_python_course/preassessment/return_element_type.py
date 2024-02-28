@@ -38,3 +38,7 @@ various_data_types = [516, 112.49, True, "meow", ("Western", "Governors", "Unive
 user_index = int(input())
 element_type = type(various_data_types[user_index]).__name__
 print(f'Element {user_index}: {element_type}')
+
+
+
+

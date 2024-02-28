@@ -41,7 +41,7 @@ with open(file_name, 'r') as csv_file:
         print(row_dict)
 
 
-{row[i].strip(): row[i + 1].strip() for i in range(0, len(row), 2)}
+
 
 # always break stuff down.
 '''
@@ -60,4 +60,6 @@ output = {}
 
 for i in range(0, len(row), 2):
     output[row[i].strip()]  = row[i + 1].strip()
-So really it is as much about readability as anything else. I'd probably chose the last example as the sweet spot in this example.
+
+# So really it is as much about readability as anything else. I'd probably chose the last example as the sweet spot in this example.
+    
