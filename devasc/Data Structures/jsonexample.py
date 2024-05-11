@@ -7,8 +7,12 @@ jsonstr = """{"people":[{"Id":"1","FirstName":"Benjamin","LastName":"Finkel",
 
 jsonobj = json.loads(jsonstr)
 
-print(jsonobj['people'][1])
+# print(jsonobj['people'][0])
 
-jsonobj = json.load(open('sample.json'))
+for person in jsonobj['people']:
+    for key, value in person.items():
+        print(value)
 
-print(jsonobj['people'])
+# jsonobj = json.load(open('sample.json'))
+
+# print(jsonobj['people'])
