@@ -7,8 +7,8 @@ Modify these please
 #For NXAPI to authenticate the client using client certificate, set 'client_cert_auth' to True.
 #For basic authentication using username & pwd, set 'client_cert_auth' to False.
 client_cert_auth=False
-switchuser='USERID'
-switchpassword='PASSWORD'
+switchuser='admin'
+switchpassword='Admin_1234!'
 client_cert='PATH_TO_CLIENT_CERT_FILE'
 client_private_key='PATH_TO_CLIENT_PRIVATE_KEY_FILE'
 ca_cert='PATH_TO_CA_CERT_THAT_SIGNED_NXAPI_SERVER_CERT'
