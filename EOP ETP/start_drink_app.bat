@@ -7,6 +7,14 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+:: Activate the virtual environment
+call venv\Scripts\activate
+if %errorlevel% neq 0 (
+    echo Failed to activate virtual environment
+    pause
+    exit /b 1
+)
+
 :: Set the FLASK_APP environment variable
 set FLASK_APP=drink_tracker_app.py
 
