@@ -8,8 +8,8 @@ call venv\Scripts\activate
 :: Set the FLASK_APP environment variable
 set FLASK_APP=drink_tracker_app.py
 
-:: Start the Flask application in the same window
-python -m flask run --no-reload > flask_log.txt 2>&1 &
+:: Run the Flask application
+start "" python -m flask run
 
 :: Wait for a few seconds to allow the Flask server to start
 timeout /t 5 /nobreak
@@ -18,4 +18,3 @@ timeout /t 5 /nobreak
 start "" "http://127.0.0.1:5000/"
 
 :: End of the script
-exit
