@@ -26,13 +26,13 @@ def get_drink(badge_number):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('web_drink_tracker.html')
 
 @app.route('/record_drink', methods=['POST'])
 def record_drink():
     badge_number = int(request.form['badge_number'])
     message = get_drink(badge_number)
-    return render_template('index.html', message=message)
+    return render_template('web_drink_tracker.html', message=message)
 
 if __name__ == "__main__":
     app.run(debug=True)
