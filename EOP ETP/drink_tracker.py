@@ -25,7 +25,7 @@ def tracker():
     while True:
         try:
             # Prompt the user for their badge number
-            badge_number = int(input("Please enter your badge number (1-9999): "))
+            badge_number = int(input("Please enter the badge number (1-9999): "))
             get_drink(badge_number)
         except ValueError:
             print("Invalid input. Please enter a numeric badge number.")
