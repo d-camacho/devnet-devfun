@@ -10,16 +10,17 @@ def get_drink(badge_number):
         return
 
     # Get the current drink count for the badge number, defaulting to 0 if not present
-    current_drinks = drink_tracker.get(badge_number, 0)
-    
-    # Check if the user has already reached the drink limit
-    if current_drinks >= 2:
-        print(f"Badge number {badge_number} has already reached the drink limit of 2.")
     else:
-        # Increment the drink count
-        drink_tracker[badge_number] = current_drinks + 1
-        print(f"Drink {current_drinks + 1} recorded for badge number {badge_number}.")
-        
+        current_drinks = drink_tracker.get(badge_number, 0)
+
+        # Check if the user has already reached the drink limit
+        if current_drinks >= 2:
+            print(f"Badge number {badge_number} has already reached the drink limit of 2.")
+        else:
+            # Increment the drink count
+            drink_tracker[badge_number] = current_drinks + 1
+            print(f"Drink {current_drinks + 1} recorded for badge number {badge_number}.")
+
 def main():
     while True:
         try:
@@ -28,10 +29,10 @@ def main():
             get_drink(badge_number)
         except ValueError:
             print("Invalid input. Please enter a numeric badge number.")
-        
+
         # Ask if another drink should be recorded
-        another = input("Would you like to record another drink? (yes/no): ").strip().lower()
-        if another != 'yes':
+        another = input("Would you like to record another drink? (y/n): ").strip().lower()
+        if another != 'y':
             break
 
 if __name__ == "__main__":
