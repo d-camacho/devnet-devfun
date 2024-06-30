@@ -1,49 +1,87 @@
-import tkinter as tk
-from tkinter import messagebox
+from flask import Flask, request, render_template_string, redirect, url_for, flash, send_file
+import pandas as pd
+import os
+import webbrowser
+from threading import Timer
+
+app = Flask(__name__)
+app.secret_key = 'supersecretkey'  # Needed for flash messages
 
 # Initialize an empty dictionary to store the number of drinks for each badge number
 drink_tracker = {}
 
-def get_drink():
-    try:
-        badge_number = int(entry_badge_number.get())
-        if not (1 <= badge_number <= 9999):
-            messagebox.showerror("Invalid Input", "Invalid badge number. Please enter a number between 1 and 9999.")
-            return
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        try:
+            badge_number = int(request.form['badge_number'])
+            if not (1 <= badge_number <= 9999):
+                flash("Invalid badge number. Please enter a number between 1 and 9999.", "error")
+            else:
+                current_drinks = drink_tracker.get(badge_number, 0)
+                if current_drinks >= 2:
+                    flash(f"Badge number {badge_number} has already reached the drink limit of 2.", "info")
+                else:
+                    drink_tracker[badge_number] = current_drinks + 1
+                    flash(f"Drink {current_drinks + 1} recorded for badge number {badge_number}.", "success")
+        except ValueError:
+            flash("Invalid input. Please enter a numeric badge number.", "error")
+        return redirect(url_for('index'))
 
-        current_drinks = drink_tracker.get(badge_number, 0)
-        if current_drinks >= 2:
-            messagebox.showinfo("Drink Limit Reached", f"Badge number {badge_number} has already reached the drink limit of 2.")
-        else:
-            drink_tracker[badge_number] = current_drinks + 1
-            messagebox.showinfo("Drink Recorded", f"Drink {current_drinks + 1} recorded for badge number {badge_number}.")
-    except ValueError:
-        messagebox.showerror("Invalid Input", "Please enter a numeric badge number.")
+    tracker_info = drink_tracker.items()
+    return render_template_string(template, tracker_info=tracker_info)
 
-def show_drink_tracker():
-    tracker_info = "\n".join([f"Badge {badge}: {drinks} drinks" for badge, drinks in drink_tracker.items()])
-    messagebox.showinfo("Drink Tracker", tracker_info if tracker_info else "No drinks recorded yet.")
+@app.route('/export')
+def export():
+    # Convert the drink tracker dictionary to a DataFrame
+    df = pd.DataFrame(list(drink_tracker.items()), columns=['Badge Number', 'Drinks'])
+    
+    # Define the filename and path
+    file_path = os.path.join(os.getcwd(), 'drink_tracker.xlsx')
+    
+    # Save the DataFrame to an Excel file
+    df.to_excel(file_path, index=False)
+    
+    # Send the file to the user
+    return send_file(file_path, as_attachment=True)
 
-# Create the main application window
-app = tk.Tk()
-app.title("Drink Tracker for ETP Night at EOP")
+template = '''
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drink Tracker for ETP Night at EOP</title>
+</head>
+<body>
+    <h1>Drink Tracker for ETP Night at EOP</h1>
+    <form method="post">
+        <label for="badge_number">Please enter the badge number (1-9999):</label>
+        <input type="text" id="badge_number" name="badge_number">
+        <input type="submit" value="Record Drink">
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <h2>Drink Tracker:</h2>
+    <ul>
+    {% for badge, drinks in tracker_info %}
+        <li>Badge {{ badge }}: {{ drinks }} drinks</li>
+    {% endfor %}
+    </ul>
+    <br>
+    <a href="{{ url_for('export') }}">Export to Excel</a>
+</body>
+</html>
+'''
 
-# Create and place the label and entry for badge number input
-label_badge_number = tk.Label(app, text="Please enter the badge number (1-9999):")
-label_badge_number.pack(pady=5)
+def open_browser():
+    webbrowser.open_new("http://127.0.0.1:5000/")
 
-entry_badge_number = tk.Entry(app)
-entry_badge_number.pack(pady=5)
-
-# Create and place the buttons
-button_record_drink = tk.Button(app, text="Record Drink", command=get_drink)
-button_record_drink.pack(pady=5)
-
-button_show_tracker = tk.Button(app, text="Show Drink Tracker", command=show_drink_tracker)
-button_show_tracker.pack(pady=5)
-
-button_exit = tk.Button(app, text="Exit", command=app.quit)
-button_exit.pack(pady=5)
-
-# Run the application
-app.mainloop()
+if __name__ == "__main__":
+    Timer(1, open_browser).start()
+    app.run(debug=True)
