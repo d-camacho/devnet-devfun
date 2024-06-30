@@ -52,7 +52,8 @@ template = '''
     <title>Drink Tracker for ETP Night at EOP</title>
 </head>
 <body>
-    <h1>Drink Tracker for ETP Night at EOP</h1>
+    <h1>Drink Tracker</h1>
+    <h2>for ETP Night at EOP</h2>
     <form method="post">
         <label for="badge_number">Please enter the badge number (1-9999):</label>
         <input type="text" id="badge_number" name="badge_number">
