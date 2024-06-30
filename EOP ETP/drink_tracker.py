@@ -21,7 +21,7 @@ def get_drink(badge_number):
             drink_tracker[badge_number] = current_drinks + 1
             print(f"Drink {current_drinks + 1} recorded for badge number {badge_number}.")
 
-def main():
+def tracker():
     while True:
         try:
             # Prompt the user for their badge number
@@ -33,10 +33,8 @@ def main():
         # Ask if another drink should be recorded
         another = input("Would you like to record another drink? (y/n): ").strip().lower()
         if another != 'y':
+            print(drink_tracker)
             break
 
 if __name__ == "__main__":
-    main()
-
-
-print(drink_tracker)
+    tracker()
