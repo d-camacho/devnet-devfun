@@ -51,6 +51,35 @@ template = '''
 <head>
     <title>Drink Tracker for ETP Night at EOP</title>
 </head>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            width: 300px;
+            margin: 0 auto;
+        }
+        .input-field {
+            margin-bottom: 10px;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 <body>
     <h1>Drink Tracker for ETP Night at EOP</h1>
     <form method="post">
