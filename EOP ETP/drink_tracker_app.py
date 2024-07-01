@@ -18,7 +18,7 @@ def index():
             if not (1 <= badge_number <= 9999):
                 flash("Invalid badge number. Please enter a number between 1 and 9999.", "error")
             else:
-                current_drinks = drink_tracker.get(badge_number, 0)
+                current_drinks = drink_tracker.get(badge_number, 0) #starts the drink count at 0 
                 if current_drinks >= 2:
                     flash(f"Badge number {badge_number} has already reached the drink limit of 2.", "info")
                 else:
@@ -52,8 +52,7 @@ template = '''
     <title>Drink Tracker for ETP Night at EOP</title>
 </head>
 <body>
-    <h1>Drink Tracker</h1>
-    <h2>for ETP Night at EOP</h2>
+    <h1>Drink Tracker for ETP Night at EOP</h1>
     <form method="post">
         <label for="badge_number">Please enter the badge number (1-9999):</label>
         <input type="text" id="badge_number" name="badge_number">
@@ -71,7 +70,7 @@ template = '''
     <h2>Drink Tracker:</h2>
     <ul>
     {% for badge, drinks in tracker_info %}
-        <li>Badge {{ badge }}: {{ drinks }} drinks</li>
+        <li>Badge {{ badge }}: {{ drinks }} {{ 'drink' if drinks == 1 else 'drinks' }}</li>
     {% endfor %}
     </ul>
     <br>
@@ -81,7 +80,7 @@ template = '''
 '''
 
 def open_browser():
-    webbrowser.open_new("http://127.0.0.1:5000/")
+    webbrowser.open_new("http://localhost:5000/")
 
 if __name__ == "__main__":
     Timer(1, open_browser).start()
