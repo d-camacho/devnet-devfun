@@ -62,7 +62,7 @@ template = '''
             margin: 0 auto;
         }
         .input-field {
-            margin-bottom: 10px;
+            margin-bottom: 30px;
         }
         .button {
             background-color: #007bff;
@@ -84,8 +84,8 @@ template = '''
     <h1>Drink Tracker for ETP Night at EOP</h1>
     <form method="post">
         <label for="badge_number">Please enter the badge number (1-9999):</label>
-        <input type="text" id="badge_number" name="badge_number">
-        <input type="submit" value="Record Drink">
+        <input type="text" id="badge_number" name="badge_number"></br>
+        <button type="submit" class="button">Record Drink</button>
     </form>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -114,3 +114,6 @@ def open_browser():
 if __name__ == "__main__":
     Timer(1, open_browser).start()
     app.run(debug=True)
+
+
+

@@ -26,22 +26,6 @@ def record_drink(badge_number):
     except ValueError:
         st.error("Invalid input. Please enter a numeric badge number.")
 
-# Define the main function to handle the Streamlit app
-def main():
-    st.title('ETP Night at EOP')
-    st.header('Drink Tracker', divider='violet')
-    st.subheader('Just be :blue[cool] :sunglasses:')
-
-    badge_number = st.text_input('Please enter the badge number (1-9999):', key='badge_number')
-    record_button = st.button('Record Drink')
-
-    if record_button and badge_number:
-        record_drink(badge_number)
-
-    display_drink_tracker()
-
-    export_button = st.button('Export to Excel', on_click=export_to_excel)
-
 # Function to display drink tracker
 def display_drink_tracker():
     st.header('Drink Tracker:')
@@ -68,6 +52,22 @@ def export_to_excel():
         
         df.to_excel(downloads_path, index=False)
         st.success(f'Data exported to {downloads_path}')
+
+# Define the main function to handle the Streamlit app
+def main():
+    st.title('Just be :blue[cool] :sunglasses:')
+    st.title('ETP Night at EOP')
+    st.header('Drink Tracker', divider='violet')    
+
+    badge_number = st.text_input('Please enter the badge number (1-9999):', key='badge_number')
+    record_button = st.button('Record Drink')    
+
+    if record_button and badge_number:
+        record_drink(badge_number)
+
+    display_drink_tracker()
+
+    export_button = st.button('Export to Excel', on_click=export_to_excel)
 
 if __name__ == '__main__':
     main()
