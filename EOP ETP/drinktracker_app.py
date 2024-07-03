@@ -6,7 +6,8 @@ from datetime import datetime
 # Initialize Streamlit settings
 st.set_page_config(page_title='Drink Tracker', layout='wide')
 
-# Initialize the drink tracker in session state if it doesn't exist
+# Initialize the drink tracker in session state if it doesn't exist. 
+# Keeps the tracker data as streamlit reruns the app every time you click "Record Drink"
 if 'drink_tracker' not in st.session_state:
     st.session_state.drink_tracker = {}
 
@@ -19,7 +20,7 @@ def record_drink(badge_number):
         else:
             current_drinks = st.session_state.drink_tracker.get(badge_number, 0)
             if current_drinks >= 2:
-                st.warning(f"Badge number {badge_number} has already reached the drink limit of 2.")
+                st.warning(f"Badge number {badge_number} has already reached the drink limit of 2.", icon="⚠️")
             else:
                 st.session_state.drink_tracker[badge_number] = current_drinks + 1
                 st.success(f"Drink {current_drinks + 1} recorded for badge number {badge_number}.")
@@ -35,6 +36,8 @@ def display_drink_tracker():
         df = pd.DataFrame(list(st.session_state.drink_tracker.items()), columns=['Badge Number', 'Drinks'])
         df['Badge Number'] = df['Badge Number'].astype(str)  # Ensure badge numbers are treated as strings
         st.dataframe(df)
+
+        
 
 # Function to export drink tracker to Excel
 def export_to_excel():
