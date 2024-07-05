@@ -60,7 +60,7 @@ def export_to_excel():
         df.to_excel(downloads_path, index=False)
         
 
-# Define the main function to handle the Streamlit app
+# Main function to run the app
 def main():
     st.title('Just be :blue[cool] :sunglasses:')
     st.title('ETP Night at EOP')
