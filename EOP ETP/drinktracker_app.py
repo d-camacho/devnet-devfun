@@ -6,7 +6,7 @@ from datetime import datetime
 # Initialize Streamlit settings
 st.set_page_config(page_title='Drink Tracker', layout='wide')
 
-# Function to load data from Excel file if it exists
+# Checks and load data based on date/time to handle data preservation in the event of app crashes/restarts
 def load_data():
     # Get the current date
     current_date = datetime.now().strftime("%Y-%m-%d")
