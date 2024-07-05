@@ -55,13 +55,6 @@ def display_drink_tracker():
         df['Badge Number'] = df['Badge Number'].astype(str)  # Ensure badge numbers are treated as strings
         st.dataframe(df)
 
-# Set export path
-def export_path():
-   
-    # Get the path to the Downloads folder
-    
-    return(current_date, downloads_path)
-
 # Function to export drink tracker to Excel
 def export_to_excel():
     if not st.session_state.drink_tracker:
