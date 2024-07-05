@@ -64,7 +64,9 @@ def export_to_excel():
 def main():
     st.title('Just be :blue[cool] :sunglasses:')
     st.title('ETP Night at EOP')
-    st.header('Drink Tracker', divider='violet')    
+    st. text('V1.2')  
+    st.header('Drink Tracker', divider='violet')  
+    
 
     badge_number = st.text_input('Please enter the badge number (1-9999):', key='badge_number')
     record_button = st.button('Record Drink')    

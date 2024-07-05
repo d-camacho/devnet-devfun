@@ -1,0 +1,3 @@
+v1.0 ~ Released 3 Jul - Records two-drinks as intended
+v1.1 ~ Released 4 Jul - Updates excel as drinks are  recorded
+v1.4 ~ Released 5 Jul - Introduced 'load_data' function to maintain data in the event of app crashes or refreshes. Also gets rid of success message every time drink is recorded.
