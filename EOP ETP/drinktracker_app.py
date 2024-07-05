@@ -6,7 +6,11 @@ from datetime import datetime
 # Initialize Streamlit settings
 st.set_page_config(page_title='Drink Tracker', layout='wide')
 
-# Checks and load data based on date/time to handle data preservation in the event of app crashes/restarts
+# Declare variables
+current_date = datetime.now().strftime("%Y-%m-%d")
+downloads_path = os.path.join(os.path.expanduser("~"), "Downloads", f"drink_tracker_{current_date}.xlsx")
+
+# Checks and load data based on date/time to handle data preservation
 def load_data():
     # Get the current date
     current_date = datetime.now().strftime("%Y-%m-%d")
@@ -33,10 +37,11 @@ def record_drink(badge_number):
         else:
             current_drinks = st.session_state.drink_tracker.get(badge_number, 0)
             if current_drinks >= 2:
-                st.warning(f"Badge number {badge_number} has already reached the drink limit of 2.")
+                st.warning(f"Badge number {badge_number} has already reached the drink limit of 2.", icon="⚠️")
             else:
                 st.session_state.drink_tracker[badge_number] = current_drinks + 1
                 st.success(f"Drink {current_drinks + 1} recorded for badge number {badge_number}.")
+                export_to_excel()
     except ValueError:
         st.error("Invalid input. Please enter a numeric badge number.")
 
@@ -50,6 +55,13 @@ def display_drink_tracker():
         df['Badge Number'] = df['Badge Number'].astype(str)  # Ensure badge numbers are treated as strings
         st.dataframe(df)
 
+# Set export path
+def export_path():
+   
+    # Get the path to the Downloads folder
+    
+    return(current_date, downloads_path)
+
 # Function to export drink tracker to Excel
 def export_to_excel():
     if not st.session_state.drink_tracker:
@@ -57,15 +69,8 @@ def export_to_excel():
     else:
         df = pd.DataFrame(list(st.session_state.drink_tracker.items()), columns=['Badge Number', 'Drinks'])
         df['Badge Number'] = df['Badge Number'].astype(str)  # Ensure badge numbers are treated as strings
-        
-        # Get the current date
-        current_date = datetime.now().strftime("%Y-%m-%d")
-        
-        # Get the path to the Downloads folder
-        downloads_path = os.path.join(os.path.expanduser("~"), "Downloads", f"drink_tracker_{current_date}.xlsx")
-        
         df.to_excel(downloads_path, index=False)
-        st.success(f'Data exported to {downloads_path}')
+        
 
 # Define the main function to handle the Streamlit app
 def main():
@@ -84,6 +89,7 @@ def main():
     export_button = st.button('Export to Excel')
     if export_button:
         export_to_excel()
+        st.success(f'Data exported to {downloads_path}')
 
 if __name__ == '__main__':
     main()
