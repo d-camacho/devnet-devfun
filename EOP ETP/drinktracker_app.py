@@ -6,10 +6,23 @@ from datetime import datetime
 # Initialize Streamlit settings
 st.set_page_config(page_title='Drink Tracker', layout='wide')
 
-# Initialize the drink tracker in session state if it doesn't exist. 
-# Keeps the tracker data as streamlit reruns the app every time you click "Record Drink"
+# Function to load data from Excel file if it exists
+def load_data():
+    # Get the current date
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    # Get the path to the Downloads folder
+    downloads_path = os.path.join(os.path.expanduser("~"), "Downloads", f"drink_tracker_{current_date}.xlsx")
+    
+    if os.path.exists(downloads_path):
+        df = pd.read_excel(downloads_path)
+        df['Badge Number'] = df['Badge Number'].astype(int)
+        st.session_state.drink_tracker = dict(zip(df['Badge Number'], df['Drinks']))
+    else:
+        st.session_state.drink_tracker = {}
+
+# Initialize the drink tracker in session state if it doesn't exist
 if 'drink_tracker' not in st.session_state:
-    st.session_state.drink_tracker = {}
+    load_data()
 
 # Define a callback function to record drinks
 def record_drink(badge_number):
@@ -20,7 +33,7 @@ def record_drink(badge_number):
         else:
             current_drinks = st.session_state.drink_tracker.get(badge_number, 0)
             if current_drinks >= 2:
-                st.warning(f"Badge number {badge_number} has already reached the drink limit of 2.", icon="⚠️")
+                st.warning(f"Badge number {badge_number} has already reached the drink limit of 2.")
             else:
                 st.session_state.drink_tracker[badge_number] = current_drinks + 1
                 st.success(f"Drink {current_drinks + 1} recorded for badge number {badge_number}.")
@@ -36,8 +49,6 @@ def display_drink_tracker():
         df = pd.DataFrame(list(st.session_state.drink_tracker.items()), columns=['Badge Number', 'Drinks'])
         df['Badge Number'] = df['Badge Number'].astype(str)  # Ensure badge numbers are treated as strings
         st.dataframe(df)
-
-        
 
 # Function to export drink tracker to Excel
 def export_to_excel():
@@ -70,7 +81,9 @@ def main():
 
     display_drink_tracker()
 
-    export_button = st.button('Export to Excel', on_click=export_to_excel)
+    export_button = st.button('Export to Excel')
+    if export_button:
+        export_to_excel()
 
 if __name__ == '__main__':
     main()
