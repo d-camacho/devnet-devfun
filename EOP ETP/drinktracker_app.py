@@ -8,7 +8,7 @@ st.set_page_config(page_title='Drink Tracker', layout='wide')
 
 # Declare variables
 current_date = datetime.now().strftime("%Y-%m-%d")
-downloads_path = os.path.join(os.path.expanduser("~"), "Downloads", f"drink_tracker_{current_date}.xlsx")
+downloads_path = os.path.join(os.path.expanduser("~"), "Documents", "ETP Records", f"drink_tracker_{current_date}.xlsx")
 
 # Checks and load data based on date/time in the downloads_path to handle data preservation of data in case app crashes or refreshes
 def load_data():
