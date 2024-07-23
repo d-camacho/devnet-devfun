@@ -65,7 +65,7 @@ def main():
     st.title('Just be :blue[cool] :sunglasses:')
     st.title('ETP Night at EOP')
     st. text('V1.4')  
-    st.header('Drink Tracker', divider='violet')  
+    st.header('Two-drink limit!', divider='violet')  
     
 
     badge_number = st.text_input('Please enter the badge number (1-9999):', key='badge_number')
